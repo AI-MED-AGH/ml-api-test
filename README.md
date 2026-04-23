@@ -17,18 +17,11 @@ docker run -d --name ml-api-test -p 8001:8000 ml-api-test-img
 
 To create a release build, the best approach is to use docker, to have a clean environment.
 
-The `build.Dockerfile` should be used for that:
+All the instructions needed to build are packed in the `build_release.sh` file, so simply run it:
 
 ```shell
-docker build -t mlapi-build -f build.Dockerfile .
-docker create --name extract-container mlapi-build
-rm dist/mlapi_server -rf
-mkdir dist -p
-docker cp extract-container:/app/dist/mlapi_server ./dist/mlapi_server
+./build_release.sh
 ```
 
-Optionally, cleanup the temporary container:
 
-```shell
-docker rm extract-container
-```
+The builded package will be available in a `dist/mlapi_server` folder
